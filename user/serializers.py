@@ -2,9 +2,15 @@ from rest_framework import serializers
 from .models import *
 
 class StudentSerializer(serializers.ModelSerializer):
+    learnstyle = serializers.CharField(max_length=1000,required=False)
+
     class Meta:
         model = Student
         fields = ['id','email','pwd','username','learnstyle']
+
+    def create(self, validated_data):
+        return Student.objects.create(**validated_data)
+    
 
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
