@@ -1,0 +1,19 @@
+version: '3'
+services:
+  postgres:
+    container_name: final-year-project
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: batch9
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: learning-platform
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    restart: always
+
+volumes:
+  postgres-data:
+    
