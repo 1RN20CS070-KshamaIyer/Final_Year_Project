@@ -6,10 +6,9 @@ from rest_framework.decorators import api_view
 
 
 # Create your views here.
-@api_view(['GET','POST'])
-def student_list(request):
-    if request.method == 'GET':
-        student=Student.objects.all()
-        serializer=StudentSerializer(student,many=True)
-        return JsonResponse({'student': serializer.data})
+@api_view(['GET'])
+def GetStudentList(request):
+    student=Student.objects.all()
+    serializer=StudentSerializer(student,many=True)
+    return JsonResponse({'students': serializer.data})
 
