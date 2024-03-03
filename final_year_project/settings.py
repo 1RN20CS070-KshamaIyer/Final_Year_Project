@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'final_year_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'learning-platform',
+        'NAME': 'learningPlatform',
         'USER': 'batch9',
         'PASSWORD': 'mypassword',
         'HOST': 'localhost',

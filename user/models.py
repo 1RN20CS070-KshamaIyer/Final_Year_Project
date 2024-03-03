@@ -81,7 +81,7 @@ class MaterialProgress(models.Model):
 
 
 class Progress(models.Model):
-    progress = models.DecimalField()
+    progress = models.DecimalField(decimal_places=2,max_digits=3)
     studentid = models.ForeignKey(Student, on_delete=models.CASCADE)
     courseid = models.ForeignKey(Course, on_delete=models.CASCADE)
 
