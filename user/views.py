@@ -37,7 +37,6 @@ def StudentLogin(request):
             return Response('Wrong password', status=status.HTTP_401_UNAUTHORIZED)
     except ObjectDoesNotExist:
         return Response("Student username does not exist", status=status.HTTP_400_BAD_REQUEST)
-  
 
 @api_view(['GET'])
 def GetStudentById(request,id):
