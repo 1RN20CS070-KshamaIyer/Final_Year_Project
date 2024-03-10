@@ -42,7 +42,7 @@ class Lesson(models.Model):
     courseid = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-       return self.lessonname
+        return self.lessonname
 
 class Material(models.Model):
     visual = models.CharField(max_length=65535)
@@ -52,7 +52,7 @@ class Material(models.Model):
     lessonid = models.ForeignKey(Lesson, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-       return self.difficulty
+        return self.difficulty
 
 class Questionnaire(models.Model):
     question = models.CharField(max_length=65535)

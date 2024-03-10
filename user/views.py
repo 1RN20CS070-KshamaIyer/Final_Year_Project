@@ -43,3 +43,10 @@ def GetStudentById(request,id):
     student=Student.objects.get(id=id)
     serializer=StudentSerializer(student)
     return JsonResponse(serializer.data)
+
+@api_view(['GET','POST'])
+def FistQuizView(request):
+    if request.method == 'GET':
+        firstQuiz = FirstQuiz.objects.all()
+        serializer=FirstQuizSerializer(firstQuiz,many=True)
+        return JsonResponse({'firstquiz': serializer.data})
