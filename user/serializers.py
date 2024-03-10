@@ -10,7 +10,6 @@ class StudentSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return Student.objects.create(**validated_data)
-    
 
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:

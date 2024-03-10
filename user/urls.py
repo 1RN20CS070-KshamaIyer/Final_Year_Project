@@ -6,5 +6,5 @@ urlpatterns = [
     path('students/',views.GetStudentList),
     path('students/<int:id>/',views.GetStudentById),
     path('students/login/',views.StudentLogin),
-    
+    path('firstquiz/',views.FistQuizView),
 ]
