@@ -43,11 +43,10 @@ class MaterialProgressSerializer(serializers.ModelSerializer):
 
 class ProgressSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Progress
+        model = CourseProgress
         fields = ['id','progress','studentid','courseid']
 
 class FeedbackSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Feedback
-        fields = ['id','mood','studentid']
+    mood = serializers.CharField(max_length=65535)
+    studentid = serializers.IntegerField()
 
