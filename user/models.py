@@ -63,34 +63,31 @@ class Questionnaire(models.Model):
     answer = models.CharField(max_length=65535)
     difficulty = models.CharField(max_length=1000)
     lessonid = models.ForeignKey(Lesson, on_delete=models.CASCADE)
-    materialid = models.ForeignKey(Material, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return self.question
 
 class MaterialProgress(models.Model):
-    notattempted = models.BooleanField()
-    inprogress = models.BooleanField()
-    completed = models.BooleanField()
     studentid = models.ForeignKey(Student, on_delete=models.CASCADE)
     lessonid = models.ForeignKey(Lesson, on_delete=models.CASCADE)
-    materialid = models.ForeignKey(Material, on_delete=models.CASCADE)
+    materialid = models.ForeignKey(Material, on_delete=models.CASCADE,null='true')
 
     def __str__(self) -> str:
         return self.studentid
 
+class LessonProgress(models.Model):
+    progress = models.DecimalField(decimal_places=2,max_digits=3)
+    studentid = models.ForeignKey(Student, on_delete=models.CASCADE)
+    lessonid = models.ForeignKey(Lesson, on_delete=models.CASCADE)
 
-class Progress(models.Model):
+    def __str__(self) -> str:
+        return self.studentid+' '+self.lessonid+' '+self.progress
+
+
+class CourseProgress(models.Model):
     progress = models.DecimalField(decimal_places=2,max_digits=3)
     studentid = models.ForeignKey(Student, on_delete=models.CASCADE)
     courseid = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return self.studentid+' '+self.progress
-
-class Feedback(models.Model):
-    mood = models.CharField(max_length=65535)
-    studentid = models.ForeignKey(Student, on_delete=models.CASCADE)
-
-    def __str__(self) -> str:
-        return self.studentid+' '+self.mood
+        return self.studentid+' '+self.courseid+' '+self.progress

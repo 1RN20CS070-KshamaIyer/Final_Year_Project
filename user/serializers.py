@@ -2,14 +2,9 @@ from rest_framework import serializers
 from .models import *
 
 class StudentSerializer(serializers.ModelSerializer):
-    learnstyle = serializers.CharField(max_length=1000,required=False)
-
     class Meta:
         model = Student
-        fields = ['id','email','pwd','username','learnstyle']
-
-    def create(self, validated_data):
-        return Student.objects.create(**validated_data)
+        exclude = ['pwd','learnstyle']
 
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -48,11 +43,10 @@ class MaterialProgressSerializer(serializers.ModelSerializer):
 
 class ProgressSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Progress
+        model = CourseProgress
         fields = ['id','progress','studentid','courseid']
 
 class FeedbackSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Feedback
-        fields = ['id','mood','studentid']
+    mood = serializers.CharField(max_length=65535)
+    studentid = serializers.IntegerField()
 
