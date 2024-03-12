@@ -9,42 +9,42 @@ class StudentSerializer(serializers.ModelSerializer):
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
-        fields = ['id','email','pwd','clientname']
+        fields = '__all__'
 
 class FirstQuizSerializer(serializers.ModelSerializer):
     class Meta:
         model = FirstQuiz
-        fields = ['id','question','choice1','choice2','choice3','choice4']
+        fields = '__all__'
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ['id','coursename','coursedescription','clientid']
+        fields = '__all__'
 
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
-        fields = ['id','lessonname','lessondescription','courseid']
+        fields = '__all__'
 
 class MaterialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Material
-        fields = ['id','visual','auditory','reading','difficulty','lessonid']
+        fields = '__all__'
 
 class QuestionnaireSerializer(serializers.ModelSerializer):
     class Meta:
         model = Questionnaire
-        fields = ['id','question','choice1','choice2','choice3','choice4','answer','difficulty','lessonid','materialid']
+        exclude = ['id','answer','difficulty','lessonid']
 
 class MaterialProgressSerializer(serializers.ModelSerializer):
     class Meta:
         model = MaterialProgress
-        fields = ['id','notattempted','inprogress','completed','studentid','lessonid','materialid']
+        fields = '__all__'
 
 class ProgressSerializer(serializers.ModelSerializer):
     class Meta:
         model = CourseProgress
-        fields = ['id','progress','studentid','courseid']
+        fields = '__all__'
 
 class FeedbackSerializer(serializers.ModelSerializer):
     mood = serializers.CharField(max_length=65535)

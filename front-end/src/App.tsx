@@ -6,6 +6,7 @@ import PrivateRoute from "./router/PrivateRoute";
 import Homepage from "./components/Homepage/Homepage";
 import Navbar from "./components/Navbar/Navbar";
 import Firstquiz from "./components/Firstquiz/Firstquiz";
+import Quiz from "./components/Quiz/Quiz";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
               <Route path="/" element={<Homepage />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/course/cid/lesson/lid/quiz" element={<Quiz />} />
               </Route>
             </Route>
             <Route path="/login" element={<Login />} />
