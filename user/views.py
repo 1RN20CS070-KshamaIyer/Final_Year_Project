@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
+from collections import defaultdict
 
 # Create your views here.
 @api_view(['GET'])
@@ -45,42 +46,42 @@ def GetStudentById(request,id):
     return JsonResponse(serializer.data)
 
 @api_view(['GET','POST'])
-def FistQuizView(request):
+def FistQuizView(request,id):
     if request.method == 'GET':
         firstQuiz = FirstQuiz.objects.all()
         serializer=FirstQuizSerializer(firstQuiz,many=True)
         return JsonResponse({'firstquiz': serializer.data})
 
 @api_view(['GET'])
-def GetCourses(request):
+def GetCourses(request,id):
     course=Course.objects.all()
     serializer=CourseSerializer(course,many=True)
     return JsonResponse({'courses': serializer.data})
 
-@api_view(['GET'])
-def GetLessons(request,cid):
-    lessons=Lesson.objects.filter(courseid=cid)
-    serializer=LessonSerializer(lessons,many=True)
-    return JsonResponse({'lessons': serializer.data})
+@api_view(['GET','POST'])
+def LessonsView(request,id,cid):
+    if request.method == 'GET':
+        lessons=Lesson.objects.filter(courseid=cid)
+        serializer=LessonSerializer(lessons,many=True)
+        return JsonResponse({'lessons': serializer.data})
 
 @api_view(['GET'])
-def GetLessonById(request,cid,lid):
+def GetLessonById(request,id,cid,lid):
     lesson=Lesson.objects.filter(id=lid,courseid=cid)
     serializer=LessonSerializer(lesson,many=True)
     return JsonResponse({'lesson': serializer.data})
 
 @api_view(['GET'])
-def GetLessonMaterial(request,cid,lid):
+def GetLessonMaterial(request,id,cid,lid):
     material=Material.objects.filter(lessonid=lid)
     serializer=MaterialSerializer(material,many=True)
     return JsonResponse({'material': serializer.data})
 
 @api_view(['GET', 'POST'])
-def QuestionnaireView(request, cid, lid):
+def QuestionnaireView(request, id, cid, lid):
     if request.method == 'GET':
-        # Retrieve the next question based on the user's progress
-        quiz_question = get_next_question_for_user(request.user.id, cid, lid)
-        serializer = QuestionnaireSerializer(quiz_question)
+        question = Questionnaire.objects.filter(lessonid=lid,difficulty='easy').first()
+        serializer = QuestionnaireSerializer(question,many=True)
         return Response({'question': serializer.data})
 
     elif request.method == 'POST':

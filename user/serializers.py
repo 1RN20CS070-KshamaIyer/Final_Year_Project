@@ -41,7 +41,7 @@ class MaterialProgressSerializer(serializers.ModelSerializer):
         model = MaterialProgress
         fields = '__all__'
 
-class ProgressSerializer(serializers.ModelSerializer):
+class CourseProgressSerializer(serializers.ModelSerializer):
     class Meta:
         model = CourseProgress
         fields = '__all__'
